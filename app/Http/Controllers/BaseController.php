@@ -28,5 +28,5 @@ abstract class BaseController
             ],
             $statusCode,
         );
-
+    }
 }
