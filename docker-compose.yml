@@ -1,0 +1,32 @@
+services:
+    app:
+        image: highjin/php:8.2
+        container_name: api
+        ports:
+            -   "3335:80"
+        volumes:
+            - .:/var/www/html/
+        networks:
+            - local
+
+    db:
+        image: postgres
+        restart: always
+        container_name: db
+        ports:
+            -   "54320:5432"
+        networks:
+            - local
+        env_file:
+            - .env
+        environment:
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DATABASE: index
+        volumes:
+            - db_data:/var/lib/postgresql/data
+
+networks:
+    local:
+volumes:
+    db_data:
